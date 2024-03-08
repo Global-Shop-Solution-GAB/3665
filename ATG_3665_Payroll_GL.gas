@@ -1,0 +1,218 @@
+Program.Sub.ScreenSU.Start
+gui.uploading..create
+gui.uploading..caption("Uploading")
+gui.uploading..size(6120,2100)
+gui.uploading..position(0,0)
+gui.uploading..event(unload,uploading_unload)
+gui.uploading..alwaysontop(False)
+gui.uploading..fontname("Arial")
+gui.uploading..fontsize(8)
+gui.uploading..forecolor(0)
+gui.uploading..fontstyle(,,,,)
+gui.uploading..BackColor(-2147483633)
+gui.uploading..controlbox(True)
+gui.uploading..maxbutton(False)
+gui.uploading..minbutton(False)
+gui.uploading..mousepointer(0)
+gui.uploading..moveable(True)
+gui.uploading..sizeable(False)
+gui.uploading..ShowInTaskBar(True)
+gui.uploading..titlebar(True)
+gui.uploading.lbl1.create(label)
+gui.uploading.lbl1.caption("Uploading...")
+gui.uploading.lbl1.backstyle(0)
+gui.uploading.lbl1.visible(True)
+gui.uploading.lbl1.size(5745,1095)
+gui.uploading.lbl1.zorder(1)
+gui.uploading.lbl1.position(200,200)
+gui.uploading.lbl1.enabled(True)
+gui.uploading.lbl1.fontname("Arial")
+gui.uploading.lbl1.fontsize(48)
+gui.uploading.lbl1.BackColor(-2147483633)
+
+
+gui.GlDate..create
+gui.GlDate..caption("GL Upload")
+gui.GlDate..size(3090,1965)
+gui.GlDate..position(0,0)
+gui.GlDate..event(unload,uploading_unload)
+gui.GlDate..alwaysontop(False)
+gui.GlDate..fontname("Arial")
+gui.GlDate..fontsize(8)
+gui.GlDate..forecolor(0)
+gui.GlDate..fontstyle(,,,,)
+gui.GlDate..BackColor(-2147483633)
+gui.GlDate..controlbox(True)
+gui.GlDate..maxbutton(False)
+gui.GlDate..minbutton(False)
+gui.GlDate..mousepointer(0)
+gui.GlDate..moveable(True)
+gui.GlDate..sizeable(False)
+gui.GlDate..ShowInTaskBar(True)
+gui.GlDate..titlebar(True)
+gui.GlDate.txtyear.create(textbox)
+gui.GlDate.txtyear.text("")
+gui.GlDate.txtyear.visible(True)
+gui.GlDate.txtyear.size(615,315)
+gui.GlDate.txtyear.zorder(0)
+gui.GlDate.txtyear.position(325,400)
+gui.GlDate.txtyear.enabled(True)
+gui.GlDate.txtyear.fontname("Arial")
+gui.GlDate.txtyear.fontsize(8)
+gui.GlDate.txtyear.maxLength(2)
+gui.GlDate.txtyear.BackColor(-2147483643)
+gui.GlDate.txtmonth.create(textbox)
+gui.GlDate.txtmonth.text("")
+gui.GlDate.txtmonth.visible(True)
+gui.GlDate.txtmonth.size(615,315)
+gui.GlDate.txtmonth.zorder(0)
+gui.GlDate.txtmonth.position(1800,400)
+gui.GlDate.txtmonth.enabled(True)
+gui.GlDate.txtmonth.fontname("Arial")
+gui.GlDate.txtmonth.fontsize(8)
+gui.GlDate.txtmonth.maxLength(2)
+gui.GlDate.txtmonth.BackColor(-2147483643)
+gui.GlDate.lbl1.create(label)
+gui.GlDate.lbl1.caption("GL Year (YY)")
+gui.GlDate.lbl1.backstyle(0)
+gui.GlDate.lbl1.visible(True)
+gui.GlDate.lbl1.size(1065,255)
+gui.GlDate.lbl1.zorder(1)
+gui.GlDate.lbl1.position(200,95)
+gui.GlDate.lbl1.enabled(True)
+gui.GlDate.lbl1.fontname("Arial")
+gui.GlDate.lbl1.fontsize(8)
+gui.GlDate.lbl1.BackColor(-2147483633)
+gui.GlDate.lbl2.create(label)
+gui.GlDate.lbl2.caption("GL Month (MM)")
+gui.GlDate.lbl2.backstyle(0)
+gui.GlDate.lbl2.visible(True)
+gui.GlDate.lbl2.size(1140,255)
+gui.GlDate.lbl2.zorder(1)
+gui.GlDate.lbl2.position(1600,85)
+gui.GlDate.lbl2.enabled(True)
+gui.GlDate.lbl2.fontname("Arial")
+gui.GlDate.lbl2.fontsize(8)
+gui.GlDate.lbl2.BackColor(-2147483633)
+gui.GlDate.cmdupload.create(button)
+gui.GlDate.cmdupload.caption("Upload")
+gui.GlDate.cmdupload.visible(True)
+gui.GlDate.cmdupload.size(855,375)
+gui.GlDate.cmdupload.zorder(0)
+gui.GlDate.cmdupload.position(900,900)
+gui.GlDate.cmdupload.enabled(True)
+gui.GlDate.cmdupload.fontname("Arial")
+gui.GlDate.cmdupload.fontsize(8)
+gui.GlDate.cmdupload.event(click,cmdupload_click)
+gui.GlDate.txtyear.tabstop(True)
+gui.GlDate.txtyear.tabindex(1)
+gui.GlDate.txtmonth.tabstop(True)
+gui.GlDate.txtmonth.tabindex(2)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'MA Ford GL Upload from payroll program.
+'Can run off any custom hook.
+
+
+Gui.GlDate..Show
+
+Program.Sub.Main.End
+
+program.sub.uploading_unload.start
+F.Intrinsic.Control.End
+
+program.sub.uploading_unload.end
+
+program.sub.cmdupload_click.start
+V.Local.cell.Declare(String)
+V.Local.FileLoc.Declare(String)
+V.Local.FileDir.Declare(String)
+V.Local.r.Declare(Long)
+V.Local.mapdir.Declare(String)
+V.Local.simport.Declare(String)
+V.Local.row.Declare(String)
+V.Local.delim.Declare(String)
+V.Local.x.Declare(Long)
+V.Local.glupload.Declare(String)
+V.Local.filename.Declare(String)
+V.Local.stemp.Declare(String)
+V.Local.sDate.Declare(String)
+V.Local.fVal.Declare(Float)
+
+'Open file to be used in the Upload
+Function.Intrinsic.UI.ShowOpenFileDialog("","*.*","C:\",Variable.local.FileLoc)
+' -- 09/18/2014 -- JCT
+' -- added condition for cancel, to prevent error
+F.Intrinsic.Control.If(V.Local.FileLoc,=,"***CANCEL***")
+	F.Intrinsic.Control.CallSub(Uploading_unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.File2String(V.Local.FileLoc,V.Local.sImport)
+F.Intrinsic.String.Split(V.Local.simport,V.Ambient.NewLine,V.Local.simport)
+V.Local.simport(0).Set("")
+V.Local.simport(1).Set("")
+
+
+Gui.uploading..Show
+F.Intrinsic.String.Format(V.Ambient.Date,"mmddyyyy",V.Local.sDate)
+F.Intrinsic.Control.For(V.Local.r,V.Local.simport.LBound,V.Local.simport.UBound,1)
+
+	F.Intrinsic.Control.If(V.local.simport(v.local.r),<>,"")
+		F.Intrinsic.String.SplitCSV(V.local.simport(v.Local.r),V.local.row)
+		F.Intrinsic.Control.If(V.Local.row(5),<>,"--------------")
+			'Remove commas from numeric data
+			F.Intrinsic.String.Replace(V.Local.row(4),",","",V.Local.row(4))
+			F.Intrinsic.String.Replace(V.Local.row(5),",","",V.Local.row(5))
+			'Change amount to negative (credit)
+' -- 09/18/2014 -- JCT
+' -- the script isn't seeing a blank as the expected 0.00.  changing to be sure it sees the literal value of 0.00
+			F.Intrinsic.String.Format(V.Local.row(5).Float,"0.00",V.Local.row(5))
+			F.Intrinsic.Control.If(V.Local.row(5),<>,"0.00")
+				F.Intrinsic.Math.Mult(V.Local.row(5).Float,-1,V.Local.fVal)
+				F.Intrinsic.String.Format(V.Local.fVal,"0.00",V.Local.row(5))
+				V.Local.row(4).Set(V.Local.row(5))
+			F.Intrinsic.Control.EndIf
+			'find lower bound of data
+			F.Intrinsic.Math.Sub(V.Local.simport.UBound,3,V.Local.x)
+			'Create upload string while ignoring bad data
+			F.Intrinsic.Control.If(V.Local.row(0),<>,"")
+				F.Intrinsic.Control.If(V.Local.row(4).IsNumeric,=,True)
+					F.Intrinsic.Control.If(V.Local.x,<>,V.Local.r)
+						F.Intrinsic.String.Concat(V.LOCAL.glupload,V.Local.row(6),",",V.Local.row(4),",",V.Local.row(0),",",V.screen.GlDate!txtyear.text,",",V.screen.GlDate!txtmonth.text,",","",",","",V.Ambient.NewLine,V.Local.glupload)
+					F.Intrinsic.Control.Else
+						F.Intrinsic.String.Concat(V.LOCAL.glupload,V.Local.row(6),",",V.Local.row(4),",",V.Local.row(0),",",V.screen.GlDate!txtyear.text,",",V.screen.GlDate!txtmonth.text,",","",",","",V.Local.glupload)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.r)
+
+'Make file and run upload program
+'changed on 8/18/2010 by enm
+F.Intrinsic.String.RPad(V.Caller.User," ",8,V.Local.stemp)
+F.Intrinsic.String.Concat(V.Caller.FilesDir,"\","GL",V.Caller.Terminal,V.Caller.CompanyCode,V.Local.filedir)
+F.Intrinsic.File.String2File(V.Local.filedir,V.Local.glupload)
+F.Intrinsic.String.Concat("GL",V.Caller.Terminal,V.Caller.CompanyCode,V.Local.filename)
+F.Intrinsic.String.RPad(V.Local.filename," ",12,V.Local.filename)
+F.Intrinsic.String.Concat(V.Ambient.QUADQuote,V.Caller.CompanyCode,V.Local.filename,V.Local.stemp.UCase,V.Ambient.QUADQuote,V.Local.glupload)
+F.Intrinsic.Task.LaunchGSSSync("XGL004","-C",V.Local.glupload)
+
+Gui.uploading..Visible(false)
+
+F.Intrinsic.String.Concat("'",V.Local.FileLoc,"' has been uploaded into a GL Batch.",V.Local.FileLoc)
+F.Intrinsic.UI.Msgbox(V.Local.FileLoc,"Upload Complete")
+
+F.Intrinsic.Control.CallSub(Uploading_unload)
+
+program.sub.cmdupload_click.end
+
+
